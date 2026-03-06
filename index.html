@@ -24,8 +24,34 @@
 <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon">
 </head>
 
-<body>
-
+<body class=" max-w-md shadow  mx-auto h-[724px] mt-10">
+    <div class="logo w-[100px] mx-auto pt-10">
+    <img src="assets/github-logo.png" alt="">
+</div>
+<div class="text-center py-5">
+    <h1 class="font-semibold text-2xl text-[#1F2937]">GitHub Issues Tracker</h1>
+    <p class="font-normal text-base text-[#64748B]">Sign in to manage your issues</p>
+</div>
+<div class="form pt-3">
+    <div class="card  w-full max-w-sm shrink-0  mx-auto ">
+      <div class="card-body">
+        <fieldset class="fieldset">
+          <label class="label text-neutral font-normal text-base text-[#1F2937]">Username</label>
+          <input id="input-name" minlength="11" maxlength="11" type="text" class="input rounded w-full" placeholder="Enter Username" />
+          <p class="font-normal text-base text-[#4A00FF]">Defult:admin</p>
+        
+          <label class="label text-neutral font-normal text-base text-[#1F2937] mt-3">Password</label>
+          <input id="input-password" maxlength="9" class="input rounded w-full " placeholder="Enter Password" />
+          <p class="font-normal text-base text-[#4A00FF]">Defult:admin1234</p>
+          <div></div>
+          <button id="login-btn" class="btn btn-primary mt-5 rounded w-full">Login</button>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="script/login.js"></script>
 </body>
+
 
 </html>
