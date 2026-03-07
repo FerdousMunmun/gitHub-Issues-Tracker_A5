@@ -20,97 +20,100 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="shortcut icon" href="./assets/github-logo.png" type="image/x-icon">
 </head>
 <body>
-<header class="flex flex-col md:flex-row justify-between items-center border-b border-gray-300 px-6 py-4 bg-white">
-<div class="flex items-center gap-4">
-<img src="./assets/github-logo.png" alt="GitHub Logo" class="w-[50px]" />
-<h1 class="font-semibold text-2xl text-[#1F2937]">GitHub Issues Tracker</h1>
-</div>
+  <header class="flex flex-col md:flex-row justify-between items-center border-b border-gray-300 px-6 py-4 bg-white">
+    <div class="flex items-center gap-4">
+      <img src="./assets/github-logo.png" alt="GitHub Logo" class="w-[50px]" />
+      <h1 class="font-semibold text-2xl text-[#1F2937]">GitHub Issues Tracker</h1>
+    </div>
 
-<div class="mt-4 md:mt-0">
-<div class="join">
-<input
-id="input-search"
-type="text"
-placeholder="Search Issue"
-class="input input-bordered join-item w-64"
-/>
-<button id="btn-search" class="btn btn-primary join-item">
-Search
-</button>
-</div>
-</div>
-</header>
+    <div class="mt-4 md:mt-0">
+      <div class="join">
+        <input
+          id="input-search"
+          type="text"
+          placeholder="Search Issue"
+          class="input input-bordered join-item w-64"
+        />
+        <button id="btn-search" class="btn btn-primary join-item">
+          Search
+        </button>
+      </div>
+    </div>
+  </header>
 
-<main class="max-w-6xl mx-auto px-4 py-8">
-<section class="bg-white border border-gray-200 rounded-2xl p-4 md:p-6">
-<div class="flex flex-wrap gap-3 mb-6">
-<button
-id="tab-all"
-onclick="filterIssues('all')"
-class="tab-btn active px-6 py-2 rounded-md border text-sm font-semibold"
->
-All
-</button>
+  <main class="max-w-6xl mx-auto px-4 py-8">
+    <section class="bg-white border border-gray-200 rounded-2xl p-4 md:p-6">
+      <div class="flex flex-wrap gap-3 mb-6">
+        <button
+          id="tab-all"
+          onclick="filterIssues('all')"
+          class="tab-btn active px-6 py-2 rounded-md border text-sm font-semibold"
+        >
+          All
+        </button>
 
-<button
-id="tab-open"
-onclick="filterIssues('open')"
-class="tab-btn px-6 py-2 rounded-md border text-sm font-semibold text-gray-500 bg-white"
->
-Open
-</button>
+        <button
+          id="tab-open"
+          onclick="filterIssues('open')"
+          class="tab-btn px-6 py-2 rounded-md border text-sm font-semibold text-gray-500 bg-white"
+        >
+          Open
+        </button>
 
-<button
-id="tab-closed"
-onclick="filterIssues('closed')"
-class="tab-btn px-6 py-2 rounded-md border text-sm font-semibold text-gray-500 bg-white"
->
-Closed
-</button>
-</div>
+        <button
+          id="tab-closed"
+          onclick="filterIssues('closed')"
+          class="tab-btn px-6 py-2 rounded-md border text-sm font-semibold text-gray-500 bg-white"
+        >
+          Closed
+        </button>
+      </div>
 
-<div class="border border-gray-200 rounded-xl p-4 mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-<div class="flex items-start gap-3">
-<div class="w-10 h-10 rounded-full bg-violet-100 text-violet-700 flex items-center justify-center text-lg font-bold">
-✦
-</div>
-<div>
-<h2 id="issue-count" class="text-lg font-bold text-gray-800">0 Issues</h2>
-<p class="text-sm text-gray-500">Track and manage your project issues</p>
-</div>
-</div>
+      <div class="border border-gray-200 rounded-xl p-4 mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div class="flex items-start gap-3">
+          <div class="w-10 h-10 rounded-full bg-violet-100 text-violet-700 flex items-center justify-center text-lg font-bold">
+            ✦
+          </div>
+          <div>
+            <h2 id="issue-count" class="text-lg font-bold text-gray-800">0 Issues</h2>
+            <p class="text-sm text-gray-500">Track and manage your project issues</p>
+          </div>
+        </div>
 
-<div class="flex items-center gap-5 text-sm text-gray-600">
-<div class="flex items-center gap-2">
-<span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-Open
-</div>
-<div class="flex items-center gap-2">
-<span class="w-2.5 h-2.5 rounded-full bg-violet-500"></span>
-Closed
-</div>
-</div>
-</div>
+        <div class="flex items-center gap-5 text-sm text-gray-600">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+            Open
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-violet-500"></span>
+            Closed
+          </div>
+        </div>
+      </div>
 
-<section id="spinner" class="hidden flex justify-center items-center py-10">
-<p class="text-lg font-medium text-gray-500">Loading...</p>
-</section>
+      <section id="spinner" class="hidden flex justify-center items-center py-10">
+        <p class="text-lg font-medium text-gray-500">Loading...</p>
+      </section>
 
-<div id="issue-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
-</section>
-</main>
+      <div id="issue-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+    </section>
+  </main>
 
-<dialog id="issue_modal" class="modal">
-<div class="modal-box max-w-2xl">
-<div id="details-container"></div>
-<div class="modal-action">
-<form method="dialog">
-<button class="btn">Close</button>
-</form>
-</div>
-</div>
-</dialog>
+  <dialog id="issue_modal" class="modal">
+    <div class="modal-box max-w-3xl p-8">
+      <div id="details-container"></div>
 
-<script src="./script/home.js"></script>
+      <div class="modal-action">
+        <form method="dialog">
+          <button class="btn bg-purple-600 text-white hover:bg-purple-700 border-none">
+            Close
+          </button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="./script/home.js"></script>
 </body>
 </html>
