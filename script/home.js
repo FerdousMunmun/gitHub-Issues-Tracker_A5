@@ -101,7 +101,7 @@ const displayIssueDetails = (issue) => {
 
   detailsBox.innerHTML = `
     <div class="space-y-6">
-      <h2 class="text-4xl font-bold text-gray-800">
+      <h2 class="text-4xl font-semibold text-gray-800">
         ${issue.title || "No Title"}
       </h2>
 
