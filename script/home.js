@@ -1,4 +1,5 @@
 
+
 let allIssues = [];
 
 const manageSpinner = (status) => {
@@ -23,11 +24,11 @@ const getPriorityBadge = (priority) => {
   const value = priority ? priority.toLowerCase() : "low";
 
   if (value === "high") {
-    return `<span class="px-3 py-1 rounded-full text-[10px] font-semibold bg-red-100 text-red-500">HIGH</span>`;
+    return `<span class="px-4 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-500">HIGH</span>`;
   } else if (value === "medium") {
-    return `<span class="px-3 py-1 rounded-full text-[10px] font-semibold bg-amber-100 text-amber-600">MEDIUM</span>`;
+    return `<span class="px-4 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-600">MEDIUM</span>`;
   } else {
-    return `<span class="px-3 py-1 rounded-full text-[10px] font-semibold bg-violet-100 text-violet-500">LOW</span>`;
+    return `<span class="px-4 py-1 rounded-full text-xs font-semibold bg-violet-100 text-violet-500">LOW</span>`;
   }
 };
 
@@ -43,7 +44,7 @@ const getStatusBadge = (status) => {
   const value = status ? status.toLowerCase() : "open";
 
   if (value === "open") {
-    return `<span class="px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-600">Open</span>`;
+    return `<span class="px-3 py-1 rounded-full text-sm font-semibold bg-green-500 text-white">Opened</span>`;
   } else {
     return `<span class="px-3 py-1 rounded-full text-sm font-semibold bg-purple-100 text-purple-600">Closed</span>`;
   }
@@ -61,7 +62,7 @@ const getTags = (issue) => {
   }
 
   if (tags.length === 0) {
-    return `<span class="px-2 py-1 rounded-full text-[10px] font-semibold bg-gray-100 text-gray-700">NO TAG</span>`;
+    return `<span class="px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-700">NO TAG</span>`;
   }
 
   return tags
@@ -69,13 +70,13 @@ const getTags = (issue) => {
       const text = String(tag).toUpperCase();
 
       if (text.includes("BUG")) {
-        return `<span class="px-2 py-1 rounded-full text-[10px] font-semibold bg-red-100 text-red-500">${text}</span>`;
+        return `<span class="px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-500">${text}</span>`;
       } else if (text.includes("HELP")) {
-        return `<span class="px-2 py-1 rounded-full text-[10px] font-semibold bg-amber-100 text-amber-600">${text}</span>`;
+        return `<span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-600">${text}</span>`;
       } else if (text.includes("ENHANCEMENT")) {
-        return `<span class="px-2 py-1 rounded-full text-[10px] font-semibold bg-emerald-100 text-emerald-600">${text}</span>`;
+        return `<span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-600">${text}</span>`;
       } else {
-        return `<span class="px-2 py-1 rounded-full text-[10px] font-semibold bg-gray-100 text-gray-700">${text}</span>`;
+        return `<span class="px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-gray-700">${text}</span>`;
       }
     })
     .join("");
@@ -86,37 +87,53 @@ const formatStatus = (status) => {
   return String(status).toLowerCase();
 };
 
+const formatDate = (dateString) => {
+  if (!dateString) return "No Date";
+
+  const date = new Date(dateString);
+  if (Number.isNaN(date.getTime())) return dateString;
+
+  return date.toLocaleDateString("en-GB");
+};
+
 const displayIssueDetails = (issue) => {
   const detailsBox = document.getElementById("details-container");
 
   detailsBox.innerHTML = `
-    <div class="space-y-4">
-      <h2 class="text-2xl font-bold text-gray-800">${issue.title || "No Title"}</h2>
+    <div class="space-y-6">
+      <h2 class="text-4xl font-bold text-gray-800">
+        ${issue.title || "No Title"}
+      </h2>
 
-      <div>
-        <h3 class="font-bold text-lg mb-1">Description</h3>
-        <p class="text-gray-600">${issue.description || "No description available"}</p>
-      </div>
-
-      <div>
-        <h3 class="font-bold text-lg mb-1">Priority</h3>
-        <p class="text-gray-600">${issue.priority || "Not found"}</p>
-      </div>
-
-      <div>
-        <h3 class="font-bold text-lg mb-2">Status</h3>
+      <div class="flex flex-wrap items-center gap-3 text-sm text-gray-500">
         ${getStatusBadge(issue.status)}
+        <span>•</span>
+        <span>Opened by ${issue.author || "Unknown"}</span>
+        <span>•</span>
+        <span>${formatDate(issue.createdAt || issue.date)}</span>
       </div>
 
-      <div>
-        <h3 class="font-bold text-lg mb-1">Author</h3>
-        <p class="text-gray-600">${issue.author || "Unknown"}</p>
+      <div class="flex flex-wrap gap-3">
+        ${getTags(issue)}
       </div>
 
-      <div>
-        <h3 class="font-bold text-lg mb-1">Tags</h3>
-        <div class="flex flex-wrap gap-2">
-          ${getTags(issue)}
+      <p class="text-[28px] leading-10 text-slate-500">
+        ${issue.description || "No description available"}
+      </p>
+
+      <div class="bg-slate-50 rounded-2xl p-5 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <p class="text-3xl text-slate-500 mb-2">Assignee:</p>
+          <p class="text-3xl font-semibold text-slate-800">
+            ${issue.author || "Unknown"}
+          </p>
+        </div>
+
+        <div>
+          <p class="text-3xl text-slate-500 mb-2">Priority:</p>
+          <div>
+            ${getPriorityBadge(issue.priority)}
+          </div>
         </div>
       </div>
     </div>
@@ -159,36 +176,34 @@ const displayIssues = (issues) => {
     const title = issue.title || "No Title";
     const description = issue.description || "No description available";
     const priority = issue.priority || "low";
-    const author = issue.author || "unknown";
-    const date = issue.createdAt || issue.date || "No Date";
 
     card.innerHTML = `
-      <div class="issue-card ${getTopBorderClass(priority)} bg-white border border-gray-200 rounded-xl p-3">
+      <div
+        onclick="loadIssueDetail(${issue.id})"
+        class="issue-card ${getTopBorderClass(priority)} bg-white border border-gray-200 rounded-xl p-4 cursor-pointer hover:shadow-lg transition duration-200 h-full"
+      >
         <div class="flex items-start justify-between gap-2 mb-3">
-          <div class="w-5 h-5 rounded-full border border-emerald-300 text-emerald-500 flex items-center justify-center text-[10px]">✓</div>
+          <div class="w-5 h-5 rounded-full border border-violet-300 text-violet-500 flex items-center justify-center text-[10px]">
+            <i class="fa-solid fa-check"></i>
+          </div>
           ${getPriorityBadge(priority)}
         </div>
 
-        <h3 class="text-sm font-bold text-gray-800 leading-5 mb-2">${title}</h3>
+        <h3 class="text-[28px] font-semibold text-slate-800 leading-9 mb-3">
+          ${title}
+        </h3>
 
-        <p class="text-xs text-gray-400 leading-5 mb-3">${description}</p>
+        <p class="text-2xl text-slate-400 leading-8 mb-4">
+          ${description}
+        </p>
 
-        <div class="flex flex-wrap gap-2 mb-4">
+        <div class="flex flex-wrap gap-2 mb-5">
           ${getTags(issue)}
         </div>
 
-        <div class="border-t border-gray-100 pt-3 text-[11px] text-gray-400 leading-5">
-          <p>#${issue.id || "0"} by ${author}</p>
-          <p>${date}</p>
-        </div>
-
-        <div class="mt-4">
-          <button
-            onclick="loadIssueDetail(${issue.id})"
-            class="w-full bg-blue-50 hover:bg-blue-100 text-blue-600 py-2 rounded-lg text-sm font-medium"
-          >
-            View Details
-          </button>
+        <div class="border-t border-gray-100 pt-3 text-sm text-slate-400 leading-6">
+          <p>#${issue.id || "0"} by ${issue.author || "unknown"}</p>
+          <p>${formatDate(issue.createdAt || issue.date)}</p>
         </div>
       </div>
     `;
