@@ -189,11 +189,11 @@ const displayIssues = (issues) => {
           ${getPriorityBadge(priority)}
         </div>
 
-        <h3 class="text-[28px] font-semibold text-slate-800 leading-9 mb-3">
+        <h3 class="text-[16px] font-semibold text-[#1F2937] leading-5 mb-3">
           ${title}
         </h3>
 
-        <p class="text-2xl text-slate-400 leading-8 mb-4">
+        <p class="text-[12px] text-[#64748B] leading-3 mb-4">
           ${description}
         </p>
 
