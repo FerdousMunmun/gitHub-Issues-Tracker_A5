@@ -16,7 +16,7 @@ value change করা যায় না
 আবার declare করা যায় না
 const a = 10
 
-What is the spread operator (...)?
+2.What is the spread operator (...)?
 Spread operator array বা object কে expand (ভেঙে) করে।
 Example:  const numbers = [1,2,3];
 const  newNumbers = [...numbers,4,5];
