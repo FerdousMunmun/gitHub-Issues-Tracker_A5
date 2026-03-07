@@ -1,3 +1,35 @@
 *{
     font-family: "Geist", sans-serif;
 }
+
+.body {
+
+background: #f5f7fb;
+}
+
+.active-tab {
+background: #4f1dff;
+color: white;
+border-color: #4f1dff;
+}
+
+.issue-card {
+box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05), 0 1px 3px rgba(16, 24, 40, 0.1);
+}
+
+.top-high {
+border-top: 3px solid #34d399;
+}
+
+.top-medium {
+border-top: 3px solid #fbbf24;
+}
+
+.top-low {
+border-top: 3px solid #a78bfa;
+}
+.tab-btn.active {
+background-color: #6366f1;
+color: white;
+border-color: #6366f1;
+}
